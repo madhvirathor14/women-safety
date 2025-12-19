@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum App</title>
+    <!-- Include Tailwind CSS CDN or link to your local file -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto">
+            <a href="/" class="text-white text-2xl font-bold">SheZen Forum</a>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mx-auto mt-8 p-8">
+        <h1 class="text-3xl font-bold">Welcome to the Forum!</h1>
+
+        <!-- Create a form for title desc -->
+
+        <form class="mt-8" action="/submit-post" method="POST">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="post-title">
+                    Post Title
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="post-title" type="text" placeholder="Enter post title" name="post-title">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="post-desc">
+                    Post Description
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="post-desc" placeholder="Enter post description" name="post-desc"></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+
+        <!-- Latest Posts -->
+        <div class="mt-8">
+            <h2 class="text-xl font-semibold">Latest Posts</h2>
+            <ul class="mt-4">
+                {% for post in forum %}
+                <li class="mb-2">
+                    <a href="/thread/{{ post.id }}" class="text-blue-500 hover:underline">{{ post.title }}</a>
+                    <p class="text-gray-600">{{ post.name }}</p>
+                </li>
+              {% endfor %}
+                <!-- Add more post links here -->
+            </ul>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
